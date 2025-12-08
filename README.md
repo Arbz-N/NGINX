@@ -41,14 +41,14 @@ Step 2 — Add HTML & CSS Files
 
   Create the main homepage:
 
-  sudo vim /usr/share/nginx/html/example.com/index.html
+  sudo vim /usr/share/nginx/html/example.com/index.html (there is a folder in this directory name (example.com) in which there is a inder.html page to practice)
 
 
   Paste your HTML code, save, and exit.
 
   Then create your CSS file:
 
-  sudo vim /usr/share/nginx/html/example.com/styles.css
+  sudo vim /usr/share/nginx/html/example.com/styles.css (there is a folder in this directory name (example.com) in which there is a styles.css page to practice)
 
 
   Paste your CSS code, save, and exit.
@@ -73,14 +73,13 @@ Step 3 — Configure nginx.conf
               try_files $uri $uri/ =404;  # Check requested file, then directory; else return 404
           }
       }
-  }
+    }
 
 Step 4 — Restart NGINX
 
   Apply the configuration changes:
   
   sudo systemctl restart nginx
-  
   
   Check NGINX status:
   
