@@ -30,7 +30,7 @@ Step 2 — Add HTML & CSS Files
 
     Create the main homepage:
     
-    sudo vim /usr/share/nginx/html/example.com/index.html (there is a inder.html page in repository to practice)
+    sudo vim /usr/share/nginx/html/example.com/index.html (there is a index.html page in repository to practice)
     
     Paste your HTML code, save, and exit.
     
