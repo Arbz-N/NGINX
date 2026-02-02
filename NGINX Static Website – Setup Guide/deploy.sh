@@ -68,6 +68,7 @@ cp $config_file /etc/nginx/sites-available/
 
 echo  -e "${YELLOW}[*] Enabling site...${NC}"
 
+rm /etc/nginx/sites-enabled/default
 ln -sf /etc/nginx/sites-available/$config_file /etc/nginx/sites-enabled/
 nginx -t
 
@@ -86,7 +87,10 @@ echo ""
 
 echo -e "${YELLOW}Service Status:${NC}"
 echo "NGINX:  $(systemctl is-active nginx)"
+echo -e "${YELLOW}Checking Port Status:${NC}"
+ss -tulnp | grep :80
+
 
 echo -e "${BLUE}Access Application:${NC}"
-echo "Access your app at: http://localhost:8080"
+echo "Access your app at: http://localhost:80"
 
