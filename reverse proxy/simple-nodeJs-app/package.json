@@ -1,0 +1,21 @@
+{
+  "name": "modern-todo-app",
+  "version": "1.0.0",
+  "description": "A modern Todo app with beautiful UI - Zero dependencies!",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node app.js"
+  },
+  "keywords": [
+    "todo",
+    "app",
+    "node.js",
+    "modern"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
