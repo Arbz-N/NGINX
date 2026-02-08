@@ -250,7 +250,7 @@ process.on('SIGTERM', () => {
   });
 });
 
-process.on('SIGINT', () => {
+process.on('SIGINT', () =>
   console.log('Shutting down gracefully...');
   server.close(() => {
     console.log('Server closed');
