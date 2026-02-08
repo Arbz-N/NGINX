@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart - ShopHub</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #f5f5f5;
+    }
+
+    nav {
+      background: white;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .logo { font-size: 28px; font-weight: 700; }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 40px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+
+    nav a:hover, nav a.active {
+      color: #FF9500;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      font-weight: 600;
+    }
+
+    .cart-icon {
+      position: relative;
+      cursor: pointer;
+      font-size: 24px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 40px;
+    }
+
+    .header {
+      margin-bottom: 40px;
+    }
+
+    .header h1 {
+      font-size: 36px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .cart-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 30px;
+    }
+
+    .cart-items {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .cart-item {
+      display: flex;
+      gap: 20px;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+
+    .item-image {
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(135deg, #FFF9E6 0%, #FFE5B4 100%);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 50px;
+    }
+
+    .item-info {
+      flex: 1;
+    }
+
+    .item-name {
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .item-details {
+      font-size: 12px;
+      color: #999;
+      margin-bottom: 10px;
+    }
+
+    .item-price {
+      color: #FF9500;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .quantity {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .qty-btn {
+      width: 30px;
+      height: 30px;
+      border: 1px solid #ddd;
+      background: white;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.3s;
+    }
+
+    .qty-btn:hover {
+      border-color: #FF9500;
+      color: #FF9500;
+    }
+
+    .remove-btn {
+      background: #ff6b6b;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      margin-top: 10px;
+      transition: all 0.3s;
+    }
+
+    .remove-btn:hover {
+      background: #ff5252;
+    }
+
+    .empty-cart {
+      text-align: center;
+      padding: 60px 20px;
+      color: #999;
+    }
+
+    .empty-cart a {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 30px;
+      background: #FF9500;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    .order-summary {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      height: fit-content;
+      position: sticky;
+      top: 100px;
+    }
+
+    .summary-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .summary-row.total {
+      border: none;
+      padding: 20px 0 0;
+      font-size: 18px;
+      font-weight: 700;
+      color: #FF9500;
+    }
+
+    .checkout-btn {
+      width: 100%;
+      padding: 15px;
+      background: #FF9500;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: all 0.3s;
+    }
+
+    .checkout-btn:hover {
+      background: #E68A00;
+      transform: translateY(-2px);
+    }
+
+    .continue-shopping {
+      width: 100%;
+      padding: 12px;
+      background: white;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .continue-shopping:hover {
+      border-color: #FF9500;
+      color: #FF9500;
+    }
+
+    footer {
+      background: #333;
+      color: white;
+      padding: 40px;
+      text-align: center;
+      margin-top: 60px;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">🛍️ ShopHub</div>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/shop">Shop</a></li>
+      <li><a href="/">Blog</a></li>
+      <li><a href="/">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <span id="priceDisplay">$0.00</span>
+      <div class="cart-icon">
+        🛒
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="header">
+      <h1>Shopping Cart</h1>
+      <p id="cartItemCount">0 items</p>
+    </div>
+
+    <div class="cart-content">
+      <div class="cart-items" id="cartItemsContainer">
+        <div class="empty-cart">
+          <p>Your cart is empty</p>
+          <a href="/shop">Continue Shopping</a>
+        </div>
+      </div>
+
+      <div class="order-summary">
+        <div class="summary-title">Order Summary</div>
+
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span id="subtotal">$0.00</span>
+        </div>
+
+        <div class="summary-row">
+          <span>Shipping</span>
+          <span>$10.00</span>
+        </div>
+
+        <div class="summary-row">
+          <span>Tax</span>
+          <span id="tax">$0.00</span>
+        </div>
+
+        <div class="summary-row total">
+          <span>Total</span>
+          <span id="total">$0.00</span>
+        </div>
+
+        <button class="checkout-btn">Proceed to Checkout</button>
+        <button class="continue-shopping" onclick="window.location.href='/shop'">Continue Shopping</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 ShopHub. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function displayCart() {
+      const container = document.getElementById('cartItemsContainer');
+      const cartData = JSON.parse(localStorage.getItem('cart') || '[]');
+
+      if (cartData.length === 0) {
+        container.innerHTML = `
+          <div class="empty-cart">
+            <p>🛒 Your cart is empty</p>
+            <a href="/shop">Continue Shopping</a>
+          </div>
+        `;
+        updateSummary([]);
+        return;
+      }
+
+      let html = '';
+      let total = 0;
+
+      cartData.forEach((item, index) => {
+        total += item.price * item.quantity;
+        html += `
+          <div class="cart-item">
+            <div class="item-image">👟</div>
+            <div class="item-info">
+              <div class="item-name">${item.name}</div>
+              <div class="item-details">Size: ${item.size || 'N/A'} | Color: ${item.color || 'N/A'}</div>
+              <div class="item-price">$${item.price}</div>
+              <div class="quantity">
+                <button class="qty-btn" onclick="updateQty(${index}, -1)">−</button>
+                <span>${item.quantity}</span>
+                <button class="qty-btn" onclick="updateQty(${index}, 1)">+</button>
+              </div>
+              <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+      document.getElementById('cartItemCount').textContent = cartData.length + ' items';
+      updateSummary(cartData);
+    }
+
+    function updateSummary(cartData) {
+      let subtotal = cartData.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      const tax = subtotal * 0.1;
+      const shipping = 10;
+      const total = subtotal + tax + shipping;
+
+      document.getElementById('subtotal').textContent = '$' + subtotal.toFixed(2);
+      document.getElementById('tax').textContent = '$' + tax.toFixed(2);
+      document.getElementById('total').textContent = '$' + total.toFixed(2);
+      document.getElementById('priceDisplay').textContent = '$' + total.toFixed(2);
+    }
+
+    function updateQty(index, change) {
+      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      cart[index].quantity += change;
+      if (cart[index].quantity <= 0) {
+        cart.splice(index, 1);
+      }
+      localStorage.setItem('cart', JSON.stringify(cart));
+      displayCart();
+    }
+
+    function removeItem(index) {
+      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      cart.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      displayCart();
+    }
+
+    displayCart();
+  </script>
+</body>
+</html>
