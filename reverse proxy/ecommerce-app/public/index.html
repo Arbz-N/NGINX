@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopHub - Modern E-commerce</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+    }
+
+    /* Navigation */
+    nav {
+      background: white;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 700;
+      color: #333;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 40px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #FF9500;
+    }
+
+    nav a.active {
+      color: #FF9500;
+      border-bottom: 3px solid #FF9500;
+      padding-bottom: 5px;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      font-weight: 600;
+    }
+
+    .cart-icon {
+      position: relative;
+      cursor: pointer;
+      font-size: 24px;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: #FF9500;
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+
+    /* Hero Section */
+    .hero {
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 60px 40px;
+      background: linear-gradient(135deg, #FFE5B4 0%, #FFDAB9 100%);
+      border-radius: 20px;
+      text-align: center;
+      color: #333;
+    }
+
+    .hero h1 {
+      font-size: 56px;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .hero p {
+      font-size: 20px;
+      margin-bottom: 30px;
+      color: #666;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 15px 40px;
+      background: #FF9500;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .btn:hover {
+      background: #E68A00;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(255, 149, 0, 0.3);
+    }
+
+    /* Featured Section */
+    .featured {
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 0 40px;
+    }
+
+    .featured h2 {
+      font-size: 36px;
+      margin-bottom: 40px;
+      text-align: center;
+      color: #333;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .product-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+
+    .product-image {
+      width: 100%;
+      height: 250px;
+      background: linear-gradient(135deg, #FFF9E6 0%, #FFE5B4 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 80px;
+      position: relative;
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: #FF9500;
+      color: white;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .product-info {
+      padding: 20px;
+    }
+
+    .product-name {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    .product-rating {
+      color: #FFB700;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .product-price {
+      font-size: 24px;
+      font-weight: 700;
+      color: #FF9500;
+      margin-bottom: 15px;
+    }
+
+    .product-action {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-small {
+      flex: 1;
+      padding: 10px;
+      background: #FF9500;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .btn-small:hover {
+      background: #E68A00;
+    }
+
+    /* Footer */
+    footer {
+      background: #333;
+      color: white;
+      padding: 40px;
+      text-align: center;
+      margin-top: 60px;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">🛍️ ShopHub</div>
+    <ul>
+      <li><a href="/" class="active">Home</a></li>
+      <li><a href="/shop">Shop</a></li>
+      <li><a href="/">Blog</a></li>
+      <li><a href="/">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <span id="priceDisplay">$0.00</span>
+      <div class="cart-icon" onclick="window.location.href='/cart'">
+        🛒
+        <div class="cart-count" id="cartCount">0</div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <h1>Welcome to ShopHub</h1>
+    <p>Premium shoes & sneakers for every occasion</p>
+    <a href="/shop" class="btn">Start Shopping</a>
+  </div>
+
+  <div class="featured">
+    <h2>Featured Products</h2>
+    <div class="products-grid" id="productsGrid">
+      <p style="text-align: center;">Loading products...</p>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 ShopHub. All rights reserved.</p>
+  </footer>
+
+  <script>
+    let cartItems = 0;
+    let cartTotal = 0;
+
+    async function loadProducts() {
+      try {
+        const response = await fetch('/api/products');
+        const result = await response.json();
+        if (result.success) {
+          const grid = document.getElementById('productsGrid');
+          grid.innerHTML = result.data.slice(0, 6).map(product => `
+            <div class="product-card">
+              <div class="product-image">
+                👟
+                <div class="product-badge">Top</div>
+              </div>
+              <div class="product-info">
+                <div class="product-name">${product.name}</div>
+                <div class="product-rating">⭐ ${product.rating} (${product.reviews} reviews)</div>
+                <div class="product-price">$${product.price}</div>
+                <div class="product-action">
+                  <button class="btn-small" onclick="goToProduct('${product.slug}')">View</button>
+                  <button class="btn-small" onclick="addToCart(${product.id}, '${product.name}', ${product.price})">Add</button>
+                </div>
+              </div>
+            </div>
+          `).join('');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+
+    function goToProduct(slug) {
+      window.location.href = '/product/' + slug;
+    }
+
+    function addToCart(productId, productName, price) {
+      cartItems++;
+      cartTotal += price;
+      document.getElementById('cartCount').textContent = cartItems;
+      document.getElementById('priceDisplay').textContent = '$' + cartTotal.toFixed(2);
+      alert('Added to cart: ' + productName);
+    }
+
+    loadProducts();
+  </script>
+</body>
+</html>
