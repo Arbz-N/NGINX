@@ -1,21 +1,15 @@
 {
-  "name": "modern-todo-app",
+  "name": "ecommerce-app",
   "version": "1.0.0",
-  "description": "A modern Todo app with beautiful UI - Zero dependencies!",
-  "main": "app.js",
+  "description": "Modern E-commerce Shop",
+  "main": "server.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "node app.js"
+    "start": "node server.js"
   },
-  "keywords": [
-    "todo",
-    "app",
-    "node.js",
-    "modern"
-  ],
-  "author": "",
-  "license": "MIT",
-  "engines": {
-    "node": ">=14.0.0"
+  "dependencies": {
+    "express": "^4.18.2",
+    "mysql2": "^3.6.0",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5"
   }
 }
